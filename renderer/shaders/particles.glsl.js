@@ -16,12 +16,12 @@ export const vertexShader = /* glsl */`
 
   void main() {
     float amp   = texture2D(uFreqTex, vec2(aFreqIndex + 0.001953125, 0.5)).r;
-    float pulse = amp * (1.0 + uBeat * 0.4);
 
-    // Drift slightly along the radius direction
+    // Displacement uses the same amp+energy that drives brightness — glow and bounce are always in sync
     vec3 dir    = normalize(aBasePos);
-    vec3 pos    = aBasePos + dir * pulse * 1.8
-                           + dir * sin(uTime * 1.2 + aFreqIndex * 6.2832) * 0.08;
+    vec3 pos    = aBasePos + dir * (amp * 2.8 + uEnergy * 1.0 + uBeat * 0.3)
+                           + dir * sin(uTime * 2.4 + aFreqIndex * 6.2832)  * 0.12
+                           + dir * sin(uTime * 5.0 + aFreqIndex * 12.5664) * amp * 0.07;
 
     vAmp       = amp;
     vFreqIndex = aFreqIndex;

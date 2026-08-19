@@ -19,11 +19,13 @@ function watchRenderer() {
   rendererWatcher = fs.watch(
     path.join(__dirname, 'renderer'),
     { recursive: true },
-    () => {
+    (_event, filename) => {
+      // Ignore OneDrive/editor temp files; only reload on actual source changes
+      if (!filename || !/\.(js|html|css)$/.test(filename)) return;
       clearTimeout(reloadTimer);
       reloadTimer = setTimeout(() => {
         if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.reload();
-      }, 120);
+      }, 300);
     },
   );
 }
@@ -47,7 +49,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false,
+      sandbox: true,
     },
   });
 
@@ -76,6 +78,12 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   mainWindow.once('ready-to-show', () => mainWindow.show());
   mainWindow.on('closed', () => { mainWindow = null; });
+
+  // Reload automatically if the renderer process crashes
+  mainWindow.webContents.on('render-process-gone', (_event, details) => {
+    console.error('[main] Renderer process gone:', details.reason);
+    if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.reload();
+  });
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools({ mode: 'detach' });
