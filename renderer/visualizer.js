@@ -7,6 +7,7 @@ import { TunnelViz }    from './viz/tunnel.js';
 import { AmbientEffects } from './effects.js';
 import { RandomViz }     from './viz/random.js';
 import { SpeakerViz }    from './viz/speaker.js';
+import { BabyViz }       from './viz/baby.js';
 
 /** Themes: [colorA, colorB] as normalised RGB triples. */
 const THEMES = {
@@ -157,6 +158,9 @@ export class Visualizer {
         break;
       case 'speaker':
         this._active = new SpeakerViz(this._scene, this._freqTex);
+        break;
+      case 'baby':
+        this._active = new BabyViz(this._scene, this._freqTex);
         break;
       default:
         this._active = new BarsViz(this._scene, this._freqTex);

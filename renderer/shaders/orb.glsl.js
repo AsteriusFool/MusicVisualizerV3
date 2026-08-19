@@ -105,8 +105,8 @@ export const fragmentShader = /* glsl */`
     float rim = pow(1.0 - abs(n.z), 2.0);
     float latitude = clamp(n.y * 0.5 + 0.5, 0.0, 1.0);
     vec3  col = mix(uColorB, uColorA, latitude);
-    float brightness = 0.3 + rim * 2.8 + uEnergy * 0.8 + uBeat * 0.35;
-    float alpha = 0.2 + rim * 0.8;
+    float brightness = 0.25 + rim * 2.1 + uEnergy * 0.65 + uBeat * 0.28;
+    float alpha = 0.25 + rim * 0.65;
     col *= brightness;
     gl_FragColor = vec4(col, alpha);
   }

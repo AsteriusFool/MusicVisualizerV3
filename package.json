@@ -14,8 +14,8 @@
     "three": "0.160.0"
   },
   "devDependencies": {
-    "electron": "^28.3.3",
-    "electron-builder": "24.9.1"
+    "electron": "^43.4.1",
+    "electron-builder": "^26.15.3"
   },
   "build": {
     "appId": "com.musicvisualizer.app",

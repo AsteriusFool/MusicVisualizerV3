@@ -34,12 +34,12 @@ export class ParticlesViz {
       vertexShader,
       fragmentShader,
       uniforms: {
-        uFreqTex: { value: freqTex },
-        uTime:    { value: 0 },
-        uEnergy:  { value: 0 },
-        uBeat:    { value: 0 },
-        uColorA:  { value: new THREE.Color() },
-        uColorB:  { value: new THREE.Color() },
+        uFreqTex:  { value: freqTex },
+        uTime:     { value: 0 },
+        uEnergy:   { value: 0 },
+        uBeat:     { value: 0 },
+        uColorA:   { value: new THREE.Color() },
+        uColorB:   { value: new THREE.Color() },
       },
       blending:     THREE.AdditiveBlending,
       depthWrite:   false,
@@ -57,10 +57,10 @@ export class ParticlesViz {
   }
 
   update(time, energy, beat) {
-    this._mat.uniforms.uTime.value   = time;
-    this._mat.uniforms.uEnergy.value = energy;
-    this._mat.uniforms.uBeat.value   = beat ? 1.0 : 0.0;
-    this._points.rotation.y          = time * 0.07;
+    this._mat.uniforms.uTime.value    = time;
+    this._mat.uniforms.uEnergy.value  = energy;
+    this._mat.uniforms.uBeat.value    = beat ? 1.0 : 0.0;
+    this._points.rotation.y           = time * 0.07;
   }
 
   dispose() {
