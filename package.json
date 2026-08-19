@@ -1,0 +1,43 @@
+{
+  "name": "music-visualizer",
+  "version": "1.0.0",
+  "description": "Universal music visualizer — system audio loopback + FFT + WebGL shaders",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node server.js",
+    "postinstall": "node scripts/postinstall.js",
+    "dev": "set NODE_ENV=development&& electron .",
+    "build": "electron-builder --win"
+  },
+  "dependencies": {
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "24.9.1"
+  },
+  "build": {
+    "appId": "com.musicvisualizer.app",
+    "productName": "Music Visualizer",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "!node_modules/**/*"
+    ]
+  }
+}

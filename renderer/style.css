@@ -1,0 +1,195 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background:
+    repeating-linear-gradient(105deg, rgba(103, 186, 255, 0.025) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(15deg, rgba(192, 99, 255, 0.02) 0 1px, transparent 1px 72px),
+    radial-gradient(circle at 72% 22%, rgba(0, 210, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 18% 78%, rgba(178, 58, 255, 0.08), transparent 32%),
+    linear-gradient(145deg, #02030a 0%, #08051a 48%, #020710 100%);
+  overflow: hidden;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color: #dce7f5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── Title bar ─────────────────────────────────────────── */
+#titlebar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 34px;
+  background: rgba(3, 7, 17, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 200;
+  -webkit-app-region: drag;
+}
+
+#titlebar-drag {
+  padding: 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+#titlebar-controls {
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+
+#titlebar-controls button {
+  width: 46px; height: 32px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+#titlebar-controls button:hover       { background: rgba(255,255,255,0.1); color: #fff; }
+#btn-close:hover                       { background: #e81123 !important; color: #fff; }
+
+/* ─── Control strip ─────────────────────────────────────── */
+#controls {
+  position: fixed;
+  top: 34px; left: 0; right: 0;
+  height: 48px;
+  background: linear-gradient(90deg, rgba(5, 12, 27, 0.94), rgba(11, 7, 31, 0.88), rgba(5, 12, 27, 0.94));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 14px;
+  z-index: 199;
+  border-bottom: 1px solid rgba(111, 221, 255, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+#controls:hover,
+#controls:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Separator between groups */
+.ctrl-group + .ctrl-group {
+  border-left: 1px solid rgba(122, 207, 255, 0.16);
+  padding-left: 14px;
+}
+
+#controls button {
+  height: 29px;
+  padding: 0 12px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(160, 198, 230, 0.2);
+  border-radius: 7px;
+  color: #9eafc2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+#controls button:hover  {
+  background: rgba(111, 221, 255, 0.12);
+  border-color: rgba(111, 221, 255, 0.52);
+  color: #f4fbff;
+  transform: translateY(-1px);
+}
+#controls button.active {
+  background: linear-gradient(135deg, rgba(0, 206, 255, 0.2), rgba(137, 67, 255, 0.28));
+  border-color: rgba(147, 229, 255, 0.78);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 198, 255, 0.16), inset 0 0 12px rgba(141, 75, 255, 0.16);
+}
+#controls button.primary { border-color: rgba(100, 206, 255, 0.5); }
+
+.select-group {
+  gap: 8px;
+}
+
+.select-group select {
+  min-width: 108px;
+  height: 29px;
+  padding: 0 28px 0 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #8eeaff 50%) calc(100% - 14px) 12px / 5px 5px no-repeat,
+    linear-gradient(135deg, #8eeaff 50%, transparent 50%) calc(100% - 10px) 12px / 5px 5px no-repeat,
+    rgba(255,255,255,0.06);
+  border: 1px solid rgba(160, 198, 230, 0.28);
+  border-radius: 7px;
+  color: #e7f7ff;
+  font: 700 10px 'Trebuchet MS', 'Segoe UI', sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+
+.select-group select:hover,
+.select-group select:focus {
+  border-color: rgba(111, 221, 255, 0.72);
+  box-shadow: 0 0 14px rgba(0, 198, 255, 0.14);
+}
+
+.select-group option {
+  background: #101329;
+  color: #e7f7ff;
+}
+
+/* Status indicator */
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #344054;
+  flex-shrink: 0;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.dot.active { background: #00e676; box-shadow: 0 0 7px #00e676; }
+.dot.error  { background: #f44336; box-shadow: 0 0 7px #f44336; }
+
+#status { font-size: 10px; color: #a8b8ca; opacity: 0.78; white-space: nowrap; }
+
+label          { font-size: 10px; color: #a8b8ca; opacity: 0.82; letter-spacing: 0.04em; }
+input[type=range] {
+  width: 94px;
+  height: 4px;
+  accent-color: #54ddff;
+  cursor: pointer;
+}
+
+/* ─── Canvas ─────────────────────────────────────────────── */
+#canvas {
+  display: block;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(1, 2, 8, 0.5) 100%);
+}

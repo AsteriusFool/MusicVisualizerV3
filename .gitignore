@@ -1,0 +1,9 @@
+# Generated dependencies and build output
+node_modules/
+dist/
+renderer/lib/
+
+# Local logs and recordings
+*.log
+*.mp4
+*.webm

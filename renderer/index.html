@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Music Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Frameless window title bar (Electron only) -->
+  <div id="titlebar">
+    <span id="titlebar-drag">Music Visualizer</span>
+    <div id="titlebar-controls">
+      <button id="btn-minimize" title="Minimize">&#8212;</button>
+      <button id="btn-maximize" title="Maximize">&#9633;</button>
+      <button id="btn-close"    title="Close">&#x2715;</button>
+    </div>
+  </div>
+
+  <!-- Control strip -->
+  <div id="controls">
+    <div class="ctrl-group">
+      <button id="btn-system-audio" class="primary">System Audio</button>
+      <button id="btn-mic">Microphone</button>
+      <span id="status-dot" class="dot"></span>
+      <span id="status">No audio source</span>
+    </div>
+
+    <div class="ctrl-group select-group">
+      <label for="viz-select">Visualizer</label>
+      <select id="viz-select">
+        <option value="bars">Bars</option>
+        <option value="orb">Orb</option>
+        <option value="particles">Particles</option>
+        <option value="random">Morphing Forms</option>
+        <option value="speaker">Neon Wormhole</option>
+      </select>
+    </div>
+
+    <div class="ctrl-group select-group">
+      <label for="theme-select">Color</label>
+      <select id="theme-select">
+        <option value="neon">Neon</option>
+        <option value="fire">Fire</option>
+        <option value="ocean">Ocean</option>
+        <option value="aurora">Aurora</option>
+        <option value="sunset">Sunset</option>
+        <option value="ice">Ice</option>
+        <option value="toxic">Toxic</option>
+        <option value="candy">Candy</option>
+      </select>
+    </div>
+
+    <div class="ctrl-group">
+      <label for="sensitivity">Sensitivity</label>
+      <input id="sensitivity" type="range" min="0.1" max="4" step="0.05" value="1.0">
+    </div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
