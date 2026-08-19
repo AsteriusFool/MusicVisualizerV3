@@ -1,3 +1,7 @@
+<img width="1718" height="1272" alt="image" src="https://github.com/user-attachments/assets/d262996e-e0c1-4dd6-b951-07a79b17f701" />
+
+---
+
 # Music Visualizer
 
 A **universal music visualizer** for Windows (and macOS/Linux) that:
